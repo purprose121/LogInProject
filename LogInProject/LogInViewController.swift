@@ -62,7 +62,7 @@ final class LogInViewController: UIViewController {
         }
     }
     
-    @IBAction func showSupportingInformation(_ sender: UIButton) {
+    @IBAction func showSupportingInformationDidTapped(_ sender: UIButton) {
         switch sender {
         case supportButtonForPassword:
             setupSupportAlert(for: .password)
@@ -77,6 +77,7 @@ final class LogInViewController: UIViewController {
     }
 }
 
+//MARK: - Method and enumeration for alert windows
 extension LogInViewController {
     // Создал перечисление, чтобы в методе setupSupportAlert(for:) не дублировать создание UIAlertController
     enum PersonalData: String {
