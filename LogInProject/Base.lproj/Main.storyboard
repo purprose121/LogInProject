@@ -3,8 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="aii-xf-mgD">
-                                <rect key="frame" x="32" y="321.33333333333331" width="329" height="209.33333333333331"/>
+                                <rect key="frame" x="32" y="289.33333333333331" width="329" height="209.33333333333331"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="feo-M1-C83">
                                         <rect key="frame" x="0.0" y="0.0" width="329" height="34.333333333333336"/>
@@ -31,12 +29,10 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smg-Xl-IiV">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smg-Xl-IiV">
                                         <rect key="frame" x="0.0" y="116.66666666666667" width="329" height="34.333333333333329"/>
-                                        <color key="backgroundColor" name="AccentColor"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Log In">
+                                        <buttonConfiguration key="configuration" style="filled" title="Log In" cornerStyle="medium">
                                             <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -46,12 +42,12 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="VvD-0v-gSB">
                                         <rect key="frame" x="0.0" y="175" width="329" height="34.333333333333343"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYm-fP-lOU">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYm-fP-lOU">
                                                 <rect key="frame" x="0.0" y="0.0" width="164.66666666666666" height="34.333333333333336"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Forgot User Name?"/>
                                                 <connections>
-                                                    <action selector="showSupportingInformationDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mYx-st-1cd"/>
+                                                    <action selector="showAlertDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mYx-st-1cd"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xoE-ZL-Yxa">
@@ -59,7 +55,7 @@
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Forgot password?"/>
                                                 <connections>
-                                                    <action selector="showSupportingInformationDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FYw-U5-cai"/>
+                                                    <action selector="showAlertDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FYw-U5-cai"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -70,15 +66,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstItem="aii-xf-mgD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="FLD-TJ-tA3"/>
+                            <constraint firstItem="aii-xf-mgD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-32" id="FLD-TJ-tA3"/>
                             <constraint firstItem="aii-xf-mgD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="HBP-v8-iWb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aii-xf-mgD" secondAttribute="trailing" constant="32" id="I45-44-2NM"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="logInButton" destination="smg-Xl-IiV" id="3Kt-mJ-rrG"/>
                         <outlet property="passwordTF" destination="mlE-66-ohl" id="ED8-pa-gzc"/>
-                        <outlet property="supportButtonForPassword" destination="xoE-ZL-Yxa" id="cJ6-pe-9fO"/>
                         <outlet property="userNameTF" destination="feo-M1-C83" id="hYR-De-0tC"/>
                     </connections>
                 </viewController>
@@ -103,11 +97,12 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4bi-HA-OZN">
-                                        <rect key="frame" x="0.0" y="102.66666666666669" width="80" height="37.333333333333314"/>
-                                        <color key="tintColor" systemColor="labelColor"/>
-                                        <imageReference key="image" image="person.fill.checkmark" catalog="system" symbolScale="default" variableValue="5.5511151231257827e-17"/>
-                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👋" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cT-wl-lAH">
+                                        <rect key="frame" x="0.0" y="100.66666666666669" width="80" height="40.666666666666657"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wa2-ld-RgI">
@@ -141,13 +136,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="person.fill.checkmark" catalog="system" width="128" height="89"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

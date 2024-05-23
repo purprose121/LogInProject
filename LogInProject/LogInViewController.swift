@@ -8,16 +8,15 @@
 import UIKit
 
 final class LogInViewController: UIViewController {
+//MARK: - IBOutlets
     @IBOutlet var userNameTF: UITextField!
     @IBOutlet var passwordTF: UITextField!
-    @IBOutlet var logInButton: UIButton!
-    @IBOutlet var supportButtonForPassword: UIButton!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        logInButton.layer.cornerRadius = 10
-    }
     
+//MARK: - Private properties
+    let login = "purpuser"
+    let password = "121"
+    
+//MARK: - Override methods
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super .touchesBegan(touches, with: event)
         view.endEditing(true)
@@ -27,48 +26,30 @@ final class LogInViewController: UIViewController {
         withIdentifier identifier: String,
         sender: Any?
     ) -> Bool {
-        if identifier == "segueForLogInVC" {
-            if userNameTF.text == PersonalData.login.rawValue 
-                && passwordTF.text == PersonalData.password.rawValue {
-                return true
-            } else {
-                let alert = UIAlertController(
-                    title: "Invalid login or password",
-                    message: "Please, enter correct login or password.",
-                    preferredStyle: .alert
-                )
-                
-                alert.addAction(UIAlertAction(
-                    title: "OK",
-                    style: .default,
-                    handler: { _ in
-                        self.userNameTF.text = nil
-                        self.passwordTF.text = nil
-                    }
-                ))
-                
-                present(alert, animated: true)
-                
-                return false
-            }
+        if userNameTF.text == login
+            && passwordTF.text == password {
+            return true
+        } else {
+            showAlert(
+                title: "Invalid login or password",
+                message: "Please, enter correct login or password.",
+                textField: passwordTF
+            )
+            
+            return false
         }
-        return false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let logOutVC = segue.destination as? LogOutViewController
-        if let currentUser = userNameTF.text {
-            logOutVC?.userName = currentUser
-        }
+        guard let logOutVC = segue.destination as? LogOutViewController else { return }
+        logOutVC.userName = login
     }
     
-    @IBAction func showSupportingInformationDidTapped(_ sender: UIButton) {
-        switch sender {
-        case supportButtonForPassword:
-            setupSupportAlert(for: .password)
-        default:
-            setupSupportAlert(for: .login)
-        }
+//MARK: - IBActions
+    @IBAction func showAlertDidTapped(_ sender: UIButton) {
+        sender.tag == 0
+        ? showAlert(title: "Support", message: "Your password is \(password)")
+        : showAlert(title: "Support", message: "Your login is \(login)")
     }
     
     @IBAction func unwind(for segue: UIStoryboardSegue) {
@@ -77,22 +58,27 @@ final class LogInViewController: UIViewController {
     }
 }
 
-//MARK: - Method and enumeration for alert windows
+//MARK: - Show alert
 extension LogInViewController {
-    // Создал перечисление, чтобы в методе setupSupportAlert(for:) не дублировать создание UIAlertController
-    enum PersonalData: String {
-        case login = "purpuser"
-        case password = "121"
-    }
-    
-    private func setupSupportAlert(for personalData: PersonalData) {
+    private func showAlert(
+        title: String,
+        message: String,
+        textField: UITextField? = nil
+    ) {
         let alert = UIAlertController(
-            title: "Support",
-            message: "Your \(personalData) is \(personalData.rawValue)",
+            title: title,
+            message: message,
             preferredStyle: .alert
         )
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .default
+            ) {_ in
+                textField?.text = nil
+            }
+        )
         
         present(alert, animated: true)
     }

@@ -16,3 +16,10 @@ final class LogOutViewController: UIViewController {
         welcomeLabel.text = "Welcome, \(userName)!"
     }
 }
+
+//extension LogOutViewController {
+//    private func setupGradient() {
+//        let gradient = CAGradientLayer()
+//        gradient.
+//    }
+//}
