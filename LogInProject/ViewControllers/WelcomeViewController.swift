@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LogOutViewController: UIViewController {
+final class WelcomeViewController: UIViewController {
     @IBOutlet var welcomeLabel: UILabel!
     var userName = ""
 
