@@ -13,10 +13,15 @@ final class LogInViewController: UIViewController {
     @IBOutlet var passwordTF: UITextField!
     
 //MARK: - Private properties
-    let login = "purpuser"
-    let password = "121"
+    private let user = User.getUserInfo()
     
 //MARK: - Override methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        userNameTF.text = user.login
+        passwordTF.text = user.password
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super .touchesBegan(touches, with: event)
         view.endEditing(true)
@@ -26,8 +31,8 @@ final class LogInViewController: UIViewController {
         withIdentifier identifier: String,
         sender: Any?
     ) -> Bool {
-        if userNameTF.text == login
-            && passwordTF.text == password {
+        if userNameTF.text == user.login
+            && passwordTF.text == user.password {
             return true
         } else {
             showAlert(
@@ -41,15 +46,25 @@ final class LogInViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let logOutVC = segue.destination as? LogOutViewController else { return }
-        logOutVC.userName = login
+        guard let tabBarVC = segue.destination as? TabBarViewController else { return }
+        
+        tabBarVC.viewControllers?.forEach { viewController in
+            if let welcomeWC = viewController as? WelcomeViewController {
+                welcomeWC.user = user
+            } else if let navigationVC = viewController as? UINavigationController {
+                guard let basicInfoVC = navigationVC.topViewController
+                        as? BasicInformationViewController else { return }
+                
+                basicInfoVC.person = user.person
+            }
+        }
     }
     
 //MARK: - IBActions
     @IBAction func showAlertDidTapped(_ sender: UIButton) {
         sender.tag == 0
-        ? showAlert(title: "Support", message: "Your password is \(password)")
-        : showAlert(title: "Support", message: "Your login is \(login)")
+        ? showAlert(title: "Support", message: "Your password is \(user.password)")
+        : showAlert(title: "Support", message: "Your login is \(user.login)")
     }
     
     @IBAction func unwind(for segue: UIStoryboardSegue) {
@@ -81,5 +96,34 @@ extension LogInViewController {
         )
         
         present(alert, animated: true)
+    }
+}
+
+//MARK: - Show alert before exit
+extension UIViewController {
+    func showAlertBeforeExit(_ identifier: String) -> Bool {
+        if identifier == "logOut" {
+            let alert = UIAlertController(
+                title: "Are you sure?",
+                message: "Do you really want to leave?",
+                preferredStyle: .alert
+            )
+            
+            alert.addAction(
+                UIAlertAction(title: "Stay", style: .default)
+            )
+            
+            alert.addAction(
+                UIAlertAction(title: "Exit", style: .destructive) { _ in
+                    self.performSegue(withIdentifier: identifier, sender: self)
+                }
+            )
+            
+            present(alert, animated: true)
+            
+            return false
+        } else {
+            return true
+        }
     }
 }

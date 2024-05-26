@@ -8,18 +8,25 @@
 import UIKit
 
 final class WelcomeViewController: UIViewController {
+//MARK: - IBOutlets
     @IBOutlet var welcomeLabel: UILabel!
-    var userName = ""
+    @IBOutlet var fullNameLabel: UILabel!
 
+//MARK: - Public properties
+    var user: User!
+
+//MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        welcomeLabel.text = "Welcome, \(userName)!"
+        welcomeLabel.text = "Welcome, \(user.login)!"
+        fullNameLabel.text = "My name is \(user.person.getFullName())."
+    }
+    
+    override func shouldPerformSegue(
+        withIdentifier identifier: String,
+        sender: Any?
+    ) -> Bool {
+        showAlertBeforeExit(identifier)
     }
 }
 
-//extension LogOutViewController {
-//    private func setupGradient() {
-//        let gradient = CAGradientLayer()
-//        gradient.
-//    }
-//}

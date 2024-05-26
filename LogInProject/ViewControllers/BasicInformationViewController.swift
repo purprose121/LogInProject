@@ -7,23 +7,49 @@
 
 import UIKit
 
-class BasicInformationViewController: UIViewController {
+final class BasicInformationViewController: UIViewController {
+//MARK: - IBOutlets
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var surnameLabel: UILabel!
+    @IBOutlet var companyLabel: UILabel!
+    @IBOutlet var departmentLabel: UILabel!
+    @IBOutlet var jobTitleLabel: UILabel!
+    @IBOutlet var photoImage: UIImageView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+//MARK: - Public properties
+    var person: Person!
+    
+//MARK: - Override methods
+    override func viewDidLayoutSubviews() {
+        photoImage.layer.cornerRadius = photoImage.frame.size.height / 2
+        
+        self.title = person.getFullName()
+        self.navigationController?.title = "Info"
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: self.title,
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        
+        photoImage.image = person.photo
+        nameLabel.text = person.name
+        surnameLabel.text = person.surname
+        companyLabel.text = person.company
+        departmentLabel.text = person.department
+        jobTitleLabel.text = person.jobTitle
+    }
 
-        // Do any additional setup after loading the view.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let bioVC = segue.destination as? BioViewController else { return }
+        bioVC.title = person.getFullName() + " Bio"
+        bioVC.bio = person.bio
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func shouldPerformSegue(
+        withIdentifier identifier: String,
+        sender: Any?
+    ) -> Bool {
+        showAlertBeforeExit(identifier)
     }
-    */
-
 }
