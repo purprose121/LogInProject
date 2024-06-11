@@ -8,13 +8,13 @@
 import UIKit
 
 final class BioViewController: UIViewController {
-//MARK: - IBOutlets
+    //MARK: - IBOutlets
     @IBOutlet var bioLabel: UILabel!
 
-//MARK: - Public properties
+    //MARK: - Public properties
     var bio = ""
 
-//MARK: - Override methods
+    //MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         bioLabel.text = bio

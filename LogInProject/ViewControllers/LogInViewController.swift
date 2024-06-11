@@ -8,14 +8,15 @@
 import UIKit
 
 final class LogInViewController: UIViewController {
-//MARK: - IBOutlets
+
+    //MARK: - IBOutlets
     @IBOutlet var userNameTF: UITextField!
     @IBOutlet var passwordTF: UITextField!
     
-//MARK: - Private properties
+    //MARK: - Private properties
     private let user = User.getUserInfo()
     
-//MARK: - Override methods
+    //MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         userNameTF.text = user.login
@@ -46,21 +47,14 @@ final class LogInViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let tabBarVC = segue.destination as? TabBarViewController else { return }
-        
-        tabBarVC.viewControllers?.forEach { viewController in
-            if let welcomeWC = viewController as? WelcomeViewController {
-                welcomeWC.user = user
-            } else if let navigationVC = viewController as? UINavigationController {
-                guard let basicInfoVC = navigationVC.topViewController
-                        as? BasicInformationViewController else { return }
-                
-                basicInfoVC.person = user.person
-            }
+        guard let tabBarVC = segue.destination as? TabBarViewController else {
+            return
         }
+        
+        tabBarVC.user = user
     }
     
-//MARK: - IBActions
+    //MARK: - IBActions
     @IBAction func showAlertDidTapped(_ sender: UIButton) {
         sender.tag == 0
         ? showAlert(title: "Support", message: "Your password is \(user.password)")

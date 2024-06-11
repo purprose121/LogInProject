@@ -16,15 +16,7 @@ struct User {
         User(
             login: "purpuser",
             password: "121",
-            person: Person(
-                name: "Andrey",
-                surname: "Ordynsky",
-                company: "Jedi Council",
-                department: "Jedi Academy",
-                jobTitle: "Youngling",
-                bio: "A long time ago in a galaxy far, far away...",
-                photo: UIImage(resource: .EC_12_E_078_998_B_4_C_7_E_98_AB_145_BC_14_A_865_B)
-            )
+            person: Person.getPerson()
         )
     }
 }
@@ -36,9 +28,21 @@ struct Person {
     let department: String
     let jobTitle: String
     let bio: String
-    let photo: UIImage
+    let photo: String
     
-    func getFullName() -> String {
+    var fullName: String {
         "\(name) \(surname)"
+    }
+    
+    static func getPerson() -> Person {
+        Person(
+            name: "Andrey",
+            surname: "Odynsky",
+            company: "Jedi Council",
+            department: "Jedi Academy",
+            jobTitle: "Youngling",
+            bio: "A long time ago in a galaxy far, far away...",
+            photo: "EC12E078-998B-4C7E-98AB-145BC14A865B"
+        )
     }
 }

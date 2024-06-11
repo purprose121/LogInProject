@@ -8,18 +8,18 @@
 import UIKit
 
 final class WelcomeViewController: UIViewController {
-//MARK: - IBOutlets
+    //MARK: - IBOutlets
     @IBOutlet var welcomeLabel: UILabel!
     @IBOutlet var fullNameLabel: UILabel!
 
-//MARK: - Public properties
+    //MARK: - Public properties
     var user: User!
 
-//MARK: - Override methods
+    //MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         welcomeLabel.text = "Welcome, \(user.login)!"
-        fullNameLabel.text = "My name is \(user.person.getFullName())."
+        fullNameLabel.text = "My name is \(user.person.fullName)."
     }
     
     override func shouldPerformSegue(
