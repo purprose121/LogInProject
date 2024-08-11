@@ -8,6 +8,7 @@
 import UIKit
 
 struct User {
+    let id = UUID()
     let login: String
     let password: String
     let person: Person

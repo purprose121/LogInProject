@@ -24,7 +24,7 @@ final class LogInViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super .touchesBegan(touches, with: event)
+        super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
     
@@ -32,8 +32,7 @@ final class LogInViewController: UIViewController {
         withIdentifier identifier: String,
         sender: Any?
     ) -> Bool {
-        if userNameTF.text == user.login
-            && passwordTF.text == user.password {
+        if (userNameTF.text, passwordTF.text) == (user.login, user.password) {
             return true
         } else {
             showAlert(
