@@ -25,7 +25,7 @@ struct User {
 struct Person {
     let name: String
     let surname: String
-    let company: String
+    let company: Company
     let department: String
     let jobTitle: String
     let bio: String
@@ -39,11 +39,16 @@ struct Person {
         Person(
             name: "Andrey",
             surname: "Odynsky",
-            company: "Jedi Council",
+            company: .jc,
             department: "Jedi Academy",
             jobTitle: "Youngling",
             bio: "A long time ago in a galaxy far, far away...",
             photo: "EC12E078-998B-4C7E-98AB-145BC14A865B"
         )
     }
+}
+
+enum Company: String {
+    case jc = "Jedi Council"
+    case ds = "Death Star"
 }
